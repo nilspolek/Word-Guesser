@@ -25,7 +25,6 @@ func main() {
 
 		candidates := FilterCandidates(words, length, excludeRunes, runesInRightPlace, runesInWrongPlace)
 		words = candidates.Strings()
-		fmt.Println(words)
 		candidates.Sort()
 		if !candidates.Print(ComputeLetterFrequencies(words), 3) {
 			return

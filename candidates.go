@@ -51,7 +51,6 @@ func (cl CandidateList) Print(letterFreq map[rune]int, topN int) bool {
 			return letters[i].freq > letters[j].freq
 		})
 
-		fmt.Printf("%d. %s (%d unique letters)\n   Letters sorted by global frequency: ", i+1, w.Word, len(w.UniqueRunes))
 		for _, lf := range letters {
 			fmt.Printf("%c ", lf.letter)
 		}
