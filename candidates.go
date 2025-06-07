@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 	"sort"
-	wordfilter "wordle/wordFilter"
+
+	wordfilter "github.com/nilspolek/Word-Guesser/wordFilter"
 )
 
 type Candidate struct {
