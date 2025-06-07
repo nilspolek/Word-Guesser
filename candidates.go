@@ -51,11 +51,7 @@ func (cl CandidateList) Print(letterFreq map[rune]int, topN int) bool {
 		sort.Slice(letters, func(i, j int) bool {
 			return letters[i].freq > letters[j].freq
 		})
-
-		for _, lf := range letters {
-			fmt.Printf("%c ", lf.letter)
-		}
-		fmt.Println()
+		fmt.Println(w.Word)
 	}
 	return len(cl) > topN
 }

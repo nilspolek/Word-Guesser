@@ -2,17 +2,41 @@ package main
 
 import (
 	"bufio"
+	_ "embed"
+	"flag"
 	"fmt"
 	"os"
 	"strings"
 )
 
+//go:embed dict.txt
+var dict []byte
+
+var (
+	length   int
+	filePath string
+)
+
 func main() {
-	words, err := ParseWordList("dict.txt")
-	if err != nil {
-		panic(err)
+	flag.StringVar(&filePath, "f", "", "Path to the dictionary file")
+	flag.IntVar(&length, "l", 5, "Length of the words to guess")
+	flag.Parse()
+
+	var (
+		words []string
+		err   error
+	)
+
+	if filePath != "" {
+		words, err = ParseWordList(filePath)
+	} else {
+		words, err = parseByteSlice(dict)
 	}
-	length := 5
+	if err != nil {
+		fmt.Printf("Error reading word list: %v\n", err)
+		return
+	}
+
 	excludeRunes := ""
 	runesInRightPlace := ""
 	runesInWrongPlace := ""
