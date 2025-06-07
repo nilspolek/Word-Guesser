@@ -20,7 +20,7 @@ go run github.com/nilspolek/Word-Guesser@latest
 
 ### Options
 
-- `-f <path>`: Path to a custom dictionary file (optional)
+- `-f <path>`: Path to a custom dictionary file like found in ***/usr/share/dict/words*** or ***/usr/share/dict/german***(optional)
 - `-l <length>`: Length of the words to guess (default: 5)
 
 ### Example
