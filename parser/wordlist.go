@@ -1,4 +1,4 @@
-package main
+package parser
 
 import (
 	"bufio"
@@ -7,7 +7,7 @@ import (
 )
 
 // parseByteSlice takes a byte slice and returns a slice of words, one for each line.
-func parseByteSlice(data []byte) ([]string, error) {
+func ParseByteSlice(data []byte) ([]string, error) {
 	lines := strings.Split(strings.TrimSpace(string(data)), "\n")
 	var words []string
 	for _, line := range lines {

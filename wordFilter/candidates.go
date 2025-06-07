@@ -1,10 +1,9 @@
-package main
+package wordfilter
 
 import (
 	"fmt"
 	"sort"
 
-	wordfilter "github.com/nilspolek/Word-Guesser/wordFilter"
 )
 
 type Candidate struct {
@@ -58,7 +57,7 @@ func (cl CandidateList) Print(letterFreq map[rune]int, topN int) bool {
 
 func FilterCandidates(words []string, length int, excluded, runesRightInPlace, runesWrongPlace string) CandidateList {
 	var candidates CandidateList
-	wds := wordfilter.New(words)
+	wds := New(words)
 	wds.FilterLength(length)
 	wds.ToLower()
 	if len(runesWrongPlace) == length {
@@ -78,11 +77,4 @@ func FilterCandidates(words []string, length int, excluded, runesRightInPlace, r
 		candidates = append(candidates, Candidate{Word: word, UniqueRunes: seen})
 	}
 	return candidates
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }

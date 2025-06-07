@@ -7,6 +7,9 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/nilspolek/Word-Guesser/parser"
+	wordfilter "github.com/nilspolek/Word-Guesser/wordFilter"
 )
 
 //go:embed dict.txt
@@ -28,9 +31,9 @@ func main() {
 	)
 
 	if filePath != "" {
-		words, err = ParseWordList(filePath)
+		words, err = parser.ParseWordList(filePath)
 	} else {
-		words, err = parseByteSlice(dict)
+		words, err = parser.ParseByteSlice(dict)
 	}
 	if err != nil {
 		fmt.Printf("Error reading word list: %v\n", err)
@@ -47,10 +50,10 @@ func main() {
 		runesInRightPlace = promptString("Enter the letters in their position (e.g. a__c_): ")
 		runesInWrongPlace = promptString("Enter the letters that are in the word but not in the right position (e.g. a_b__): ")
 
-		candidates := FilterCandidates(words, length, excludeRunes, runesInRightPlace, runesInWrongPlace)
+		candidates := wordfilter.FilterCandidates(words, length, excludeRunes, runesInRightPlace, runesInWrongPlace)
 		words = candidates.Strings()
 		candidates.Sort()
-		if !candidates.Print(ComputeLetterFrequencies(words), 3) {
+		if !candidates.Print(parser.ComputeLetterFrequencies(words), 3) {
 			return
 		}
 	}
